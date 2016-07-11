@@ -11,11 +11,11 @@ int main()
 {
 	_S_AREA town = {
 		"town",
-		NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+		"store",NULL,NULL,NULL,NULL,NULL,NULL,NULL
 	};
 	_S_AREA dungeon_1 = {
-		"dungeon_1",
-		NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+		"dungeon-1",
+		"dungeon-2",NULL,NULL,NULL,NULL,NULL,NULL,NULL
 	};	
 	
 	town.node[0] = &dungeon_1;
@@ -31,6 +31,10 @@ int main()
 
 		if(!strcmp(pTemp,"look")) {
 			printf("당신은 %s 에 서 있습니다. \r\n",pCurrentArea->m_szName);
+			printf("이동가능지역");
+			for(int i=0; i<8; i++) {
+				printf("%s \r\n",town.node[i]);
+			}
 		}
 		else if(!strcmp(pTemp,"move")) {
 			char *pszArea = strtok(NULL,"");
