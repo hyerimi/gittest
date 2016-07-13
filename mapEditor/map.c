@@ -3,7 +3,21 @@
 
 #include "map.h"
 
-char Default_Tilepalette[] = {'.','#','@','%','/','+'};
+char Default_Tilepalette[] = {
+	'.',//0
+	'#',//1
+	'@',//2
+	'/',//3
+	92,//4
+	'+',//5
+	'=',//6
+	'^',//7
+	'>',//8
+	'<',//9
+	'|',//10
+	'-',//11
+	'*'//12
+	};
 
 void map_init(_S_MAP_OBJECT *pObj)
 {
@@ -42,8 +56,13 @@ void map_new(_S_MAP_OBJECT *pObj, int nWidth, int nHeight)
 
 }
 void map_PutTile(_S_MAP_OBJECT *pObj, int x, int y, int nTileIndex)
-{
-	pObj->m_pBuf[ pObj->m_header.m_nWidth * y + x ] = nTileIndex;
+{	
+	//클리핑처리
+	if(x>=0 && y>=0) {
+		if(x<pObj->m_header.m_nWidth && y<pObj->m_header.m_nHeight){
+			pObj->m_pBuf[ pObj->m_header.m_nWidth * y + x ] = nTileIndex;
+		}
+	}
 }
 
 int map_save(_S_MAP_OBJECT * pObj, char *filename)
@@ -105,6 +124,19 @@ void map_drawTile_mirror_v(_S_MAP_OBJECT *pObj, int posx, int posy, _S_MAP_OBJEC
 		for(int ix=0; ix < pObj->m_header.m_nWidth; ix++) {
 			map_PutTile(pTarget,ix + posx, -iy + posy,
 					pObj->m_pBuf[iy*pObj->m_header.m_nWidth + ix]);
+		}
+	}
+}
+
+
+void map_drawTile_trn(_S_MAP_OBJECT *pObj, int posx, int posy, _S_MAP_OBJECT *pTarget)
+{
+	for(int iy=0; iy < pObj->m_header.m_nHeight; iy++) {
+		for(int ix=0; ix < pObj->m_header.m_nWidth; ix++) {
+			if(pObj->m_pBuf[iy*pObj->m_header.m_nWidth +ix] != 0) {
+			map_PutTile(pTarget,ix + posx, iy + posy,
+					pObj->m_pBuf[iy*pObj->m_header.m_nWidth + ix]);
+			}
 		}
 	}
 }

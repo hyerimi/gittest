@@ -3,23 +3,19 @@
 
 #include "../mapEditor/map.h"
 
-void map_drawTile_trn(_S_MAP_OBJECT *pObj, int posx, int posy, _S_MAP_OBJECT *pTarget)
-{
-	for(int iy=0; iy < pObj->m_header.m_nHeight; iy++) {
-		for(int ix=0; ix < pObj->m_header.m_nWidth; ix++) {
-			if(pObj->m_pBuf[iy*pObj->m_header.m_nWidth +ix] != 0) {
-			map_PutTile(pTarget,-ix + posx, iy + posy,
-					pObj->m_pBuf[iy*pObj->m_header.m_nWidth + ix]);
-			}
-		}
-	}
-}
-
 int main()
 {
 	_S_MAP_OBJECT screenBuf;
 	map_init(&screenBuf);
 	map_new(&screenBuf,16,16);
+	
+	map_PutTile(&screenBuf,2,5,4);
+	map_PutTile(&screenBuf,3,5,4);
+	map_PutTile(&screenBuf,1,5,4);
+	map_PutTile(&screenBuf,0,5,4);
+	map_PutTile(&screenBuf,0,6,4);
+	map_PutTile(&screenBuf,1,6,4);
+
 
 	_S_MAP_OBJECT humanObj;
 	map_init(&humanObj);
