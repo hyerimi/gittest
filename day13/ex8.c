@@ -23,8 +23,7 @@ _S_Plane gPlayerObject;
 
 int main()
 {
-	system("clear");
-
+	
 	for(int i=0; i<2; i++)
 	{
 		map_init(&gScreenBuf[i]);
@@ -35,9 +34,13 @@ int main()
 	map_load(&gPlayer,"plane1.dat");
 
 	Plane_init(&gPlayerObject,&gPlayer,17,10);
+	
+	
 
 	set_conio_terminal_mode();
 	acc_tick=last_tick=0;
+	
+	system("clear");
 
 	while(bLoop) {
 		//타이밍처리 
@@ -46,14 +49,16 @@ int main()
 			(double)(work_timer.tv_nsec * 1e-9);
 		double delta_tick = cur_tick - last_tick;
 		last_tick = cur_tick;
- 		
+ 		//실시간 입력	
 		if(kbhit() != 0) {
 			char ch = getch();
 			if(ch == 'q') {
 				bLoop = 0;
 				puts("bye~ \r");
 			}
-			Plane_Apply(&gPlayerObject,delta_tick,ch);
+			//Plane_Apply(&gPlayerObject,delta_tick,ch);
+
+			gPlayerObject.fpApply(&gPlayerObject,delta_tick,ch);
 		}
 		
 		//타이밍계산
@@ -63,7 +68,8 @@ int main()
 			gotoxy(0,0);
 			map_drawTile(&gScreenBuf[0],0,0,&gScreenBuf[1]);
 			
-			Plane_Draw(&gPlayerObject,&gScreenBuf[1]);
+			gPlayerObject.fpDraw(&gPlayerObject,&gScreenBuf[1]);
+			//Plane_Draw(&gPlayerObject,&gScreenBuf[1]);
 
 			map_dump(&gScreenBuf[1],Default_Tilepalette);
 			acc_tick = 0;
