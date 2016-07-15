@@ -47,4 +47,3 @@ void Plane_Apply(_S_Plane *pObj, double deltaTick, char key_input)
 	}
 }
 
-

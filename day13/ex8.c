@@ -33,9 +33,7 @@ int main()
 	map_init(&gPlayer);
 	map_load(&gPlayer,"plane1.dat");
 
-	Plane_init(&gPlayerObject,&gPlayer,17,10);
-	
-	
+	Plane_init(&gPlayerObject,&gPlayer,17,10);	
 
 	set_conio_terminal_mode();
 	acc_tick=last_tick=0;

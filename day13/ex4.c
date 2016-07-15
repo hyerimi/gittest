@@ -33,14 +33,14 @@ int main()
 	map_init(&gBulletmodel);
 	map_load(&gBulletmodel,"plasma.dat");
 	bullet_init(&gBulletObject,0,0,0,&gBulletmodel);
-	
+
 	system("clear");
-	
+
 	int targetx, targety;
 
 	targety = 3;
 	targetx = 2;
-	
+
 	int fire_x = 24;
 	int fire_y = 12;
 
@@ -51,7 +51,7 @@ int main()
 			(double)(work_timer.tv_nsec * 1e-9);
 		double delta_tick = cur_tick - last_tick;
 		last_tick = cur_tick;
- 		
+
 		if(kbhit() != 0) {
 			char ch = getch();
 			if(ch == 'q') {
@@ -63,10 +63,10 @@ int main()
 				vx = targetx - fire_x;
 				vy = targety - fire_y;
 				c = sqrt(vx*vx + vy*vy);
-				
+
 				vx /= c;
 				vy /= c;
-				
+
 				bullet_fire(&gBulletObject,fire_x,fire_y,10.0,vx,vy,10);
 			}
 			else if(ch == 'a')
@@ -82,7 +82,7 @@ int main()
 
 		//apply 위치
 		bullet_apply(&gBulletObject,delta_tick);
-		
+
 		//타이밍계산
 		acc_tick += delta_tick;
 		if(acc_tick > 0.1) {
@@ -92,7 +92,7 @@ int main()
 
 			map_PutTile(&gScreenBuffer[1],fire_x,fire_y,1);
 			map_PutTile(&gScreenBuffer[1],targetx,targety,5);
-			
+
 			map_dump(&gScreenBuffer[1],Default_Tilepalette);
 			//puts("tick...\r");
 			acc_tick = 0;
@@ -100,3 +100,4 @@ int main()
 	}
 	return 0;
 }
+
