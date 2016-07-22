@@ -1,4 +1,4 @@
-#Invadar game
+#Invader game
 
 ##How to compile 
 1  gcc game.c plane.c ../mapEditor/map.c ../engine/engine2d.c alien.c bullet.c -g -o game.exe
