@@ -77,37 +77,3 @@ void bullet_init(_S_BULLET_OBJECT *pObj, double x, double y, double speed,
 	pObj->pfFire = bullet_fire;
 }
 
-/*
-double getDistance(_S_BULLET_OBJECT *pObj, _S_Plane *pPlane)
-{
-	
-	double bullet_pos_x = pObj->m_fXpos;
-	double bullet_pos_y = pObj->m_fYpos;
-
-	double target_pos_x = pPlane.m_fXpos;
-	double target_pos_y = pPlane.m_fYpos;
-
-	double vx = target_pos_x - bullet_pos_x;
-	double vy = target_pos_y - bullet_pos_y;
-	double dist = sqrt(vx*vx + vy*vy);
-	return dist;
-}
-void getDirection(_S_BULLET_OBJECT *pObj, _S_Plane *pPlane, double *_vx, double *_vy)
-{
-
-	double bullet_pos_x = pObj->m_fXpos;
-	double bullet_pos_y = pObj->m_fYpos;
-
-	double target_pos_x = pPlane.m_fXpos;
-	double target_pos_y = pPlane.m_fYpos;
-
-	double vx = target_pos_x - bullet_pos_x;
-	double vy = target_pos_y - bullet_pos_y;
-	double dist = sqrt(vx*vx + vy*vy);
-	vx /= dist;
-	vy /= dist;
-
-	*_vx = vx;
-	*_vy = vy;
-} 
-*/

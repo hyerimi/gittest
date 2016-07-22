@@ -36,14 +36,14 @@ void map_init(_S_MAP_OBJECT *pObj)
 
 void map_dump(_S_MAP_OBJECT *pObj,char *pTile_pal)
 {
-	/*putTile(
+       /* putTile(
 			0,pObj->m_header.m_nHeight,
 			0,pObj->m_header.m_nWidth,
 			pObj->m_header.m_nWidth,
 			pObj->m_pBuf,
 			pTile_pal	
-		   );
-	*/
+		   ); */
+
 	for(int iy=0;iy < pObj->m_header.m_nHeight;iy++) {
 		for(int ix=0;ix < pObj->m_header.m_nWidth;ix++) {
 			putchar(pTile_pal[ pObj->m_pBuf[iy* pObj->m_header.m_nWidth + ix]]);
@@ -108,9 +108,9 @@ int map_load(_S_MAP_OBJECT *pObj,char *filename)
 
 	fread(pObj->m_pBuf,nSize,1,pf);
 
-	for(int i=0;i<nSize;i++) {
-		printf("%d,",pObj->m_pBuf[i]);
-	}
+	//for(int i=0;i<nSize;i++) {
+	//	printf("%d,",pObj->m_pBuf[i]);
+	//}
 
 	return 0;
 }
@@ -167,6 +167,7 @@ void map_drawTile_trn(_S_MAP_OBJECT *pObj, int posx,int posy,_S_MAP_OBJECT *pTar
 	}
 
 }
+
 
 
 

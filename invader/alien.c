@@ -25,42 +25,52 @@ static void Apply(_S_ALIEN_OBJECT *pObj, double deltaTick)
 			break;
 		case 2 : //move right
 			pObj->m_fXpos += (deltaTick * speed);
-			if(pObj->m_fXpos >= 40) {
+			if(pObj->m_fXpos >= 38) {
 				pObj->m_nFSM = 3;
 				pObj->m_nStep = 0;
-
-				pObj->m_fYpos += 1;
-
-				if(pObj->m_fYpos >= 24) {
-					pObj->m_nFSM = 0;
-				}
 			}
 			if(pObj->m_pBullet != NULL) {
 				if(pObj->m_pBullet->m_nFSM == 0) {
 					pObj->m_pBullet->pfFire(pObj->m_pBullet,pObj->m_fXpos,pObj->m_fYpos,5.0,0,1.0,3.0);
-
 				}
 			}
-
 			break;
-		case 3 : //move left
-			pObj->m_fXpos -= (deltaTick * speed);
-			if(pObj->m_fXpos <= 0) {
-				pObj->m_nStep = 0;
-				pObj->m_nFSM = 2;
-
-				pObj->m_fYpos += 1;
-
-				if(pObj->m_fYpos >= 15) {
-					pObj->m_nFSM = 0;
+		case 3 : //move down
+		    pObj->m_fYpos += (deltaTick * speed);
+		    if(pObj->m_fYpos >= 22){
+		        pObj->m_nFSM = 4;
+		        pObj->m_nStep = 0;
+		    }
+            if(pObj->m_pBullet != NULL) {
+				if(pObj->m_pBullet->m_nFSM == 0) {
+					pObj->m_pBullet->pfFire(pObj->m_pBullet,pObj->m_fXpos,pObj->m_fYpos,5.0,0,1.0,3.0);
 				}
+			}
+		    break;
+		case 4 : //move left
+			pObj->m_fXpos -= (deltaTick * speed);
+			if(pObj->m_fXpos <= 2) {
+				pObj->m_nStep = 0;
+				pObj->m_nFSM = 5;
 			}
 			if(pObj->m_pBullet != NULL) {
 				if(pObj->m_pBullet->m_nFSM == 0) {
 					pObj->m_pBullet->pfFire(pObj->m_pBullet,pObj->m_fXpos,pObj->m_fYpos,5.0,0,1.0,3.0);
 				}
 			}
-		break;
+		    break;
+		case 5 : //move high
+		    pObj->m_fYpos -= (deltaTick * speed);
+		    if(pObj->m_fYpos <= 2) {
+		        pObj->m_nFSM = 2;
+		        pObj->m_nStep = 0;
+		    }
+		    if(pObj->m_pBullet != NULL) {
+            	if(pObj->m_pBullet->m_nFSM == 0) {
+            		pObj->m_pBullet->pfFire(pObj->m_pBullet,pObj->m_fXpos,pObj->m_fYpos,5.0,0,1.0,3.0);
+           		}
+       		}
+		    break;
 	}
 }
 
